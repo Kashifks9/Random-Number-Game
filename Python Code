@@ -1,0 +1,110 @@
+from IPython.display import clear_output
+import random as rd 
+
+def Instructions():
+    print("\t\t====== Instructions ======\n")
+    print("*) In 'GUESS THE NUMBER' game, you'll tell the range in which you want to play,eg; 10,20!")
+    print("*) Once you've tell the range, There is a random number generated, within your range!")
+    print("*) Now you have to 'GUESS THE NUMBER' !")
+    print("*) There are 3 difficulty levels, each have it's own number of trials.")
+    print("i) Easy [6 trials]\nii) Medium [4 trials]\niii) Hard [2 trials]")
+    print("*) It will also give you hints about the number, eg; If number is greater or less!")
+    print("*) If you 'GUESS THE NUMBER' within given trials you will win, unless you'll lose.\n")
+    print("*) Good Luck !")
+
+#It will get user input, and Compare it to the Random Value
+def Guess_No(sysvalue):
+    uservalue = int(input("Enter the number: "))
+    if uservalue == sysvalue:
+        print("Congratulations, You Won the Game!")
+        flag = True
+        return flag
+    
+    elif uservalue > sysvalue:
+        print("You Entered Higher Value..")
+    
+    elif uservalue < sysvalue:
+        print("You Entered Smaller Value..")
+#It will get user input, and Compare it to the Random Value
+
+
+
+#It Will Select The game Levels    
+def Difficulty_level():
+    print("Select Diffculty level")
+    print("Press E for Easy\nPress M for Medium \nPress H for Hard")
+    b = input(">")
+    b= b.lower()
+    
+    if b=="e":
+        clear_output()
+        print("Level = Easy\nGame Start \n")
+        Compare_Number(6)
+  
+    elif b=="m":
+        clear_output()
+        print("Level = Medium\nGame Start \n")
+        Compare_Number(4)
+
+    elif b=="h":
+        clear_output()
+        print("Level = Hard\nGame Start \n")
+        Compare_Number(2)
+     
+    else:
+        print("Invalid Command, Try Again ! ")
+        Difficulty_level()
+#It Will Select The game Levels    
+
+
+#It will run the Trails according to Difficulty Level        
+def Compare_Number(itr):
+    range = int(input("Enter Range:"))
+    sysvalue= Random_num_generator(range)
+    print("A number has been generated, 'GUESS THE NUMBER'.")
+    i=0
+    flag = False
+    while i<itr:
+        flag= Guess_No(sysvalue)
+        i+=1
+        if flag is True:
+            break
+    else: 
+        print("The number was ",sysvalue)
+        print("You lose...")
+#It will run the Trails according to Difficulty Level        
+  
+
+#Linear Congruential Method 
+def Random_num_generator(rng):
+    a=rd.randint(1,9)
+    c=rd.randint(1,9)
+    rand = 10
+    #a=3
+    #c=6
+    rand = (a*rand+c)%rng
+    return rand
+#Linear Congruential Method        
+
+
+while True:
+    
+    print("\t====== Welcome To 'GUESS THE NUMBER' Game ======")
+    print("\nPress I To See Instructions.\nPress S To Start The Game.\nPress E To Exit.")
+    a= input(">")
+
+    if a.lower() =="i":
+        clear_output()
+        Instructions()
+    
+    elif a.lower()=="s":
+        clear_output()
+        Difficulty_level()
+    
+    elif a.lower()=="e":
+        print("\nThank You for Playing! ")
+        break
+    
+    else:
+        print("You have entered incorrect command !, Try again")
+    
